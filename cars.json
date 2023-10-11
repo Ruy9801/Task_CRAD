@@ -1,0 +1,35 @@
+[
+    {
+        "id": 0,
+        "brand": "Mars",
+        "model": "Bans",
+        "year": 2003,
+        "engine_capacity": 2.9,
+        "color": "black",
+        "body_type": "right",
+        "mileage": 777,
+        "price": 20000
+    },
+    {
+        "id": 1,
+        "brand": "Mars",
+        "model": "Bans",
+        "year": 2003,
+        "engine_capacity": 2.9,
+        "color": "black",
+        "body_type": "right",
+        "mileage": 777,
+        "price": 20000
+    },
+    {
+        "id": 2,
+        "brand": "rui",
+        "model": "Bans",
+        "year": 2003,
+        "engine_capacity": 2.9,
+        "color": "black",
+        "body_type": "right",
+        "mileage": 777,
+        "price": 20000
+    }
+]
