@@ -11,19 +11,19 @@
         "price": 20000
     },
     {
-        "id": 1,
-        "brand": "Mars",
-        "model": "Bans",
-        "year": 2003,
-        "engine_capacity": 2.9,
-        "color": "black",
-        "body_type": "right",
-        "mileage": 777,
-        "price": 20000
+        "id": 2,
+        "brand": "sdklj",
+        "model": "sdklj",
+        "year": 987,
+        "engine_capacity": 987,
+        "color": "sdklj",
+        "body_type": "slkj",
+        "mileage": 97,
+        "price": 987
     },
     {
-        "id": 2,
-        "brand": "rui",
+        "id": 4,
+        "brand": "Mars",
         "model": "Bans",
         "year": 2003,
         "engine_capacity": 2.9,

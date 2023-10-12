@@ -2,7 +2,7 @@ from decimal import Decimal
 import json
 
 class CreateMixin:
-    def create(self):
+    def create(self, data):
 
         with open(self.file_name, 'r') as file:
             data1 = json.load(file)
@@ -13,7 +13,7 @@ class CreateMixin:
 
         with open(self.file_name, 'w') as file:
             json.dump(data1, file, indent=4)
-            return f'Created new data: {self.data}.'
+            return f'Created new data: {data}.'
         
     def get_max_id(self, data):
         if data:
@@ -45,26 +45,29 @@ class UpdateMixin:
 
         for i in data2:
             if i['id'] == id:
-                continue
-            else:
-                pass
-
-        data2[id] = data
+                index = data2.index(i)
+                data2[index] = data
+        
 
         with open(self.file_name, 'w') as file:
             json.dump(data2, file, indent=4)
-            return f'Successfully updated: {self.data}.'
+            return f'Successfully updated: {data}.'
 
 
 
 class DeleteMixin:
     def delete(self, id):
-        data = self.read(self.file_name)
+        with open('cars.json', 'r') as file:
+            data = json.load(file)
+
         for i in data:
-            if i.get('id') == id:
-                data.remove(i)
+            if i['id'] == id:
+                index = data.index(i)
+                data.remove(data[index])
+        
         with open(self.file_name, 'w') as file:
-            json.dump(data, file)
+            json.dump(data, file, indent=4)
+            return f'Successfully Deleted.'
 
 class Cars(CreateMixin, ListingMixin, RetrieveMixin, UpdateMixin, DeleteMixin):
     def __init__(self, brand, model, year, engine_capacity, color, body_type, mileage, price):
@@ -92,23 +95,67 @@ class Cars(CreateMixin, ListingMixin, RetrieveMixin, UpdateMixin, DeleteMixin):
         self.file_name = 'cars.json'
 
 
+while True:
 
-    
-car = Cars('Mars', 'Bans', 2003, 2.9, 'black', 'right', 777, 20000)
-# print(car.create())
+    def main():
+        print('Привет, вам доступны следующие функции:\n\tPOST\n\tGET\n\tDETAIL\n\tPUT\n\tDELETE')
+        method = input('Введите одну из функции: ').upper()
+        car = Cars('Mars', 'Bans', 2003, 2.9, 'black', 'right', 777, 20000)
+        if method == 'GET':
+            print(car.listing())
 
-# print(car.listing())
+        elif method == 'DETAIL':
+            id = int(input('Введите id: '))
+            print(car.retrieve(id))
 
-# print(car.retrieve(2))
-kwargs = {
-        "id": 2,
-        "brand": "rui",
-        "model": "Bans",
-        "year": 2003,
-        "engine_capacity": 2.9,
-        "color": "black",
-        "body_type": "right",
-        "mileage": 777,
-        "price": 20000
-    }
-print(car.update(kwargs, 2))
+        elif method == 'POST':
+            brand = input('Введите марку: ')
+            model = input('Введите модель: ')
+            year = int(input('Введите год выпуска: '))
+            engine = int(input('Введите объем двигателя: '))
+            color = input('Введите цвет: ')
+            body_type = input('Введите тип кузова: ')
+            mileage = int(input('Введите пробег: '))
+            price = int(input('Введите цену: '))
+            data = {
+            'brand': brand,
+            'model': model,
+            'year': year,
+            'engine_capacity': engine,
+            'color': color,
+            'body_type': body_type,
+            'mileage': mileage,
+            'price': price
+            }
+            print(car.create(data))
+
+        elif method == 'PUT':
+            brand = input('Введите марку: ')
+            model = input('Введите модель: ')
+            year = int(input('Введите год выпуска: '))
+            engine = int(input('Введите объем двигателя: '))
+            color = input('Введите цвет: ')
+            body_type = input('Введите тип кузова: ')
+            mileage = int(input('Введите пробег: '))
+            price = int(input('Введите цену: '))
+            id = int(input('Введите id: '))
+            data = {
+            'id': id,
+            'brand': brand,
+            'model': model,
+            'year': year,
+            'engine_capacity': engine,
+            'color': color,
+            'body_type': body_type,
+            'mileage': mileage,
+            'price': price
+            }
+            print(car.update(data, id))
+
+        elif method == 'DELETE':
+            id = int(input('Введите id: '))
+            print(car.delete(id))
+
+
+    main()
+
